@@ -62,8 +62,16 @@ def main():
 			linha = t.rstrip('\n')
 			function_1(linha)
 	wordlist.close()
+	os.system("cat "+ sys.argv[2]+'tmp' + " | sort | uniq > " + sys.argv[2]+ '; rm ' + sys.argv[2]+'tmp')
+	wl = open(sys.argv[2], 'r')
+	lcount = 0
+	for line in wl:
+		lcount += 1
+	wl.close
+	print("\nWordlist gerada com "+str(lcount)+" senhas.\n")
+
+
 
 if __name__ == '__main__':
   main()
 
-os.system("cat "+ sys.argv[2]+'tmp' + " | sort | uniq > " + sys.argv[2]+ '; rm ' + sys.argv[2]+'tmp')
