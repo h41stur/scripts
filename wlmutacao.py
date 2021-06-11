@@ -4,19 +4,27 @@ import sys
 import string
 import datetime
 import re
+import os
 from unicodedata import normalize
 
 dic = {'aioO':'@100','aeioOs':'43100$','aeiou':'AEIOU','IilLsS':'1111$$'}
-wordlist = open(sys.argv[2], 'w')
+wordlist = open(sys.argv[2]+'tmp', 'w')
 data = datetime.datetime.now()
+car = ['!','@','#','$','%','&','*','(',')','_','-','=','+','<','>',';',':','/','?','~','^','[','{',']','}']
 
 def function_2 (word):
 	for n in range(1001):
 		wordlist.write(word+str(n)+'\n')
-		wordlist.write(word+'@'+str(n)+'\n')
+		wordlist.write(str(n)+word+'\n')
+		for s in car:
+			wordlist.write(word+str(s)+str(n)+'\n')
+			wordlist.write(word+str(n)+str(s)+'\n')
+			wordlist.write(str(s)+str(n)+word+'\n')
+			wordlist.write(str(s)+word+str(n)+'\n')
+			wordlist.write(str(n)+str(s)+word+'\n')
+			wordlist.write(str(n)+word+str(s)+'\n')
 
 def function_1 (line):
-	car = ['!','@','#','$','%','&','*','(',')','_','-','=','+']
 	for i in dic:
 		wordlist.write(line.translate(str.maketrans(i,dic[i]))+'\n')
 		function_2(line.translate(str.maketrans(i,dic[i])))
@@ -37,13 +45,13 @@ def function_1 (line):
 		function_2(line.translate(str.maketrans(i,dic[i])).swapcase())
 		wordlist.write(line.translate(str.maketrans(i,dic[i])).swapcase()+str(data.year)+'\n')
 
-	for l in car:
-			wordlist.write(line.translate(str.maketrans(i,dic[i]))+l+str(data.year)+'\n')
-			wordlist.write(line.translate(str.maketrans(i,dic[i])).upper()+l+str(data.year)+'\n')
-			wordlist.write(line.translate(str.maketrans(i,dic[i])).lower()+l+str(data.year)+'\n')
-			wordlist.write(line.translate(str.maketrans(i,dic[i])).capitalize()+l+str(data.year)+'\n')
-			wordlist.write(line.translate(str.maketrans(i,dic[i])).title()+l+str(data.year)+'\n')
-			wordlist.write(line.translate(str.maketrans(i,dic[i])).swapcase()+l+str(data.year)+'\n')
+		for l in car:
+			wordlist.write(line.translate(str.maketrans(i,dic[i]))+str(l)+str(data.year)+'\n')
+			wordlist.write(line.translate(str.maketrans(i,dic[i])).upper()+str(l)+str(data.year)+'\n')
+			wordlist.write(line.translate(str.maketrans(i,dic[i])).lower()+str(l)+str(data.year)+'\n')
+			wordlist.write(line.translate(str.maketrans(i,dic[i])).capitalize()+str(l)+str(data.year)+'\n')
+			wordlist.write(line.translate(str.maketrans(i,dic[i])).title()+str(l)+str(data.year)+'\n')
+			wordlist.write(line.translate(str.maketrans(i,dic[i])).swapcase()+str(l)+str(data.year)+'\n')
 
 
 def main():
@@ -55,3 +63,5 @@ def main():
 
 if __name__ == '__main__':
   main()
+
+os.system("cat "+ sys.argv[2]+'tmp' + " | sort | uniq > " + sys.argv[2]+ '; rm ' + sys.argv[2]+'tmp')
