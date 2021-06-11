@@ -7,7 +7,7 @@ import re
 import os
 from unicodedata import normalize
 
-dic = {'aioO':'@100','aeioOs':'43100$','aeiou':'AEIOU','IilLsS':'1111$$'}
+dic = {'aioO':'@100','aeioOs':'43100$','IilLsS':'1111$$','abcdefghijklmnopqrstuvwxyz':'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
 wordlist = open(sys.argv[2]+'tmp', 'w')
 data = datetime.datetime.now()
 car = ['!','@','#','$','%','&','*','(',')','_','-','=','+','<','>',';',':','/','?','~','^','[','{',']','}']
@@ -21,8 +21,10 @@ def function_2 (word):
 			wordlist.write(word+str(n)+str(s)+'\n')
 			wordlist.write(str(s)+str(n)+word+'\n')
 			wordlist.write(str(s)+word+str(n)+'\n')
+			wordlist.write(str(s)+word+str(s)+'\n')
 			wordlist.write(str(n)+str(s)+word+'\n')
 			wordlist.write(str(n)+word+str(s)+'\n')
+			wordlist.write(str(n)+word+str(n)+'\n')
 
 def function_1 (line):
 	for i in dic:
