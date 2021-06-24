@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index_files/style.css">
+  </head>
+
+  <body>
+    <nav>
+      <ul class="menu">
+     <li class="logo"><img src="index_files/mr-logo.png" style="width:150px;height:100%;float:left;"><a></a></li>
+      <li class="item"><a href="http://172.16.1.10/turismo/index.php">Home</a></li>
+      <li class="item"><a href="http://172.16.1.10/turismo/procurar.php">Pesquisar</a></li>
+      <li class="item"><a href="http://172.16.1.10/turismo/destino.php">Destinos</a></li>
+      <li class="item button secondary"><a href="http://172.16.1.10/turismo/login.php">Login</a></li>
+      <li class="item button secondary"><a href="http://172.16.1.10/turismo/registrar.php">Cadastrar</a></li>
+      </ul>
+    </nav>
+
+    <div class="container" style="display:block;position:relative;">
+      <img src="index_files/bg-2.jpg" style="min-width:720px;width:100%;position:absolute;height:100%;">
+      <div class="right"></div>
+      <div class="left"></div> 
+
+      <div class="login-form">
+        <h2>Login</h2>
+	<form action="login.php" method="POST">
+        <div class="inptField">
+            <label for="email"><b>Usuario</b></label>
+            <input type="text" placeholder="Login" name="login" required="">
+          </div>
+          <div class="inptField">
+            <label for="email"><b>Senha</b></label>
+            <input type="password" placeholder="Senha" name="senha" required="">
+          </div>
+<div class="resultado"></div>
+          <button type="submit">Login</button>
+            <div class="container signin">
+          <p>Não possui uma conta? <a href="http://172.16.1.10/turismo/registrar.php">Registre-se!</a></p>
+          <p>Ativação da conta? <a href="http://172.16.1.10/turismo/ativar-conta.php"> Ativar! </a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <!-- Footer legal -->
+      <section class="footer-legal">
+        <ul class="footer-legal-list">
+          <li> Plataforma de testes praticos desenvolvida pela Desec Security.</li>
+          <li>© 2020 Copyright DESEC Security.</li>
+        </ul>
+      </section>
+    </footer>
+
+  
+
+
+
+
+</body></html>

